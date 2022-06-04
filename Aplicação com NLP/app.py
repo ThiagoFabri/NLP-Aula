@@ -21,7 +21,7 @@ try:
 
     # app design
     app_meta('📊')
-    set_bg_hack('image2.jpg')
+    set_bg_hack('image3.png')
 
     # hide warning for st.pyplot() deprecation
     st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -55,7 +55,7 @@ try:
         st.markdown(subheader, unsafe_allow_html=True)
         #st.subheader('** Selecione uma das opções abaixo:**')
         options = st.radio('O que deseja fazer?', ('','Classificação de textos', 'Geração de textos', 'Sumarização de textos', 
-                                                   'Reconhecimento de entidades nomeadas', 'Análise de sentimento'))
+                                                   'Reconhecimento de entidades nomeadas', 'Análise de sentimento','Geração de img'))
 
         if options == 'Classificação de textos':
         # as linhas a seguir criam caixas de texto nas quais o usuário pode inserir
@@ -109,6 +109,12 @@ try:
                     result = sentiment_analysis(text)
                     st.text('Aguarde.... Analisando texto.')
             st.success(result)
+        
+        if options == 'Geração de img':
+            file = st.file_uploader("Please upload an image file", type=["jpg", "png"])
+            result = image_classifier(file)
+            st.success(result)
+
 
 except ValueError:
     st.error("Oops, falha ao carregar o arquivo. Por favor, tente novamente.")
